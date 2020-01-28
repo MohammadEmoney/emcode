@@ -32,6 +32,11 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected const ROLE_SUPER_ADMIN = 1;
+    protected const ROLE_ADMIN = 2;
+    protected const ROLE_AUTHOR = 3;
+    protected const ROLE_USER = 4;
+
     /**
      * Create a new controller instance.
      *
@@ -69,6 +74,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => self::ROLE_USER
         ]);
 
         $superadmins = User::where('role_id', 1)->get();

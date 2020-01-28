@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('admin')->namespace('Admin')->middleware('auth')->group(function(){
+Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'admin'])->group(function(){
     Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
     Route::post('comment/approval/{comment}', 'CommentController@approve');
     Route::get('user/profile/{user}', 'UserController@profile')->name('user.profile');

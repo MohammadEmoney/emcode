@@ -42,9 +42,9 @@
             <div class="single-footer-widget mail-chimp">
             <h6 class="mb-20">Instragram Feed</h6>
             <ul class="instafeed d-flex flex-wrap">
-                @foreach($instagram as $insta)
+                {{-- @foreach($instagram as $insta)
                     <li><a href="{{ $insta->link }}"><img src="{{ $insta->images->thumbnail->url }}" alt="instagram"></a></li>
-                @endforeach
+                @endforeach --}}
             </ul>
             </div>
         </div>

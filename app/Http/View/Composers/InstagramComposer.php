@@ -18,7 +18,7 @@ class InstagramComposer
      */
     public function compose(View $view)
     {
-        $instagram = new Instagram('1621403388.1677ed0.b9f2eff851714dec9e4c20b4f3de7910');
-        $view->with(['instagram'=>  $instagram->media(['count' => 4])]);
+        // $instagram = new Instagram('1621403388.1677ed0.b9f2eff851714dec9e4c20b4f3de7910');
+        // $view->with(['instagram'=>  $instagram->media(['count' => 4])]);
     }
 }
