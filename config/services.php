@@ -13,6 +13,23 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => route('github.redirect'),
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => route('google.redirect'),
+    ],
+
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => route('facebook.redirect'),
+    ],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),

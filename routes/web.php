@@ -31,3 +31,11 @@ Route::namespace('Front')->group(function(){
 });
 
 Auth::routes();
+Route::prefix('login')->namespace('Auth')->group(function(){
+    Route::get('github', 'LoginController@redirectToProvider');
+    Route::get('github/callback', 'LoginController@handleProviderCallback')->name('github.redirect');
+    Route::get('google', 'GoogleLoginController@redirectToProvider');
+    Route::get('google/callback', 'GoogleLoginController@handleProviderCallback')->name('google.redirect');
+    Route::get('facebook', 'LoginController@redirectToProvider');
+    Route::get('facebook/callback', 'LoginController@handleProviderCallback')->name('facebook.redirect');
+});
