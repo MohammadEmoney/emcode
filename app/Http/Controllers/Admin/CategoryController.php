@@ -138,6 +138,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if($category->image){
+            $imagePath = public_path($category->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }

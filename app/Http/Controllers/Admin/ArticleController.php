@@ -155,7 +155,20 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        if($article->image){
+            $imagePath = public_path($article->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+        if($article->file){
+            $filePath = public_path($article->file);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+        $article->delete();
+        return redirect()->route('articles.index');
     }
 
     public function attachImage(Request $request)
