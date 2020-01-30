@@ -10,12 +10,12 @@
 
 <meta charset="UTF-8">
 <meta name="description" content="@yield('description', 'Find The best tutorial for programming wedsites and designing with html, css, javascript, php, laravel, python, android, and so on. If there is a probelm with your code or it\'s not working you can search it here.')">
-<meta name="keywords" content="HTML,CSS,Php,JavaScript,Laravel">
+<meta name="keywords" content="@yield('keywords', 'HTML,CSS,Php,JavaScript,Laravel')">
 <meta name="author" content="@yield('author', 'Mohammad Imani')">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<title>@yield('title', 'Em Code')</title>
+<title>@yield('title', 'EmCode')</title>
 <link rel="icon" href="{{ asset('img/icon.png') }}" type="image/png">
 <link rel="stylesheet" href="{{ asset('admin/vendors/mdi/css/materialdesignicons.min.css') }}">
 <link rel="stylesheet" href="{{ asset('front/vendors/bootstrap/bootstrap.min.css') }}">

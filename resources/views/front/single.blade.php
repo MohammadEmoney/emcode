@@ -1,5 +1,21 @@
 @extends('layouts.front')
 
+@section('title')
+    Emcode - {{ $article->title }}
+@endsection
+
+@section('description')
+    {{ $article->short_description }}
+@endsection
+
+@section('keywords')
+@php $string = "" ;@endphp
+    @foreach($article->categories as $cat)
+        @php $string .=  $cat->title . " , " @endphp
+    @endforeach
+    {{ ltrim($string) }}
+@endsection
+
 @section('content')
 <!--================Hero Banner start =================-->
 @component('front.components.banner')
@@ -168,8 +184,6 @@
         $(document).ready(function(){
             setTimeout(
                 function(){
-                    alert('yup');
-
                     $.ajax({
                         type:'POST',
                         url:'/view/article',
