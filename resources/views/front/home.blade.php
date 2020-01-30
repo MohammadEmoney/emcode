@@ -8,7 +8,7 @@
 <!--================Hero Banner end =================-->
 
 <!--================ Blog slider start =================-->
-@component('front.components.slider')
+@component('front.components.slider', ['articles' => $articles])
 
 @endcomponent
 <!--================ Blog slider end =================-->

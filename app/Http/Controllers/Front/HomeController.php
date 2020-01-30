@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $articles = Article::paginate(10);
+        $articles = Article::orderBy('id', 'DESC')->paginate(10);
         return view('front.home', compact('articles'));
     }
 

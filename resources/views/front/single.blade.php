@@ -36,11 +36,18 @@
                     <div>{!! $article->content !!}</div>
                     <div class="news_d_footer flex-column flex-sm-row">
                         @if(Auth::check())
-                            @if(isset($article->user->like))
-                                <span class="like-update align-middle mr-2" data-id="{{ $article->user->like->id }}" >
-                                    <i class="mdi mdi-heart{{ (auth()->user()->id == $article->user->like->user_id && $article->user->like->liked == true) ? "" : "-outline" }}"
-                                        data-like="{{ (auth()->user()->id == $article->user->like->user_id && $article->user->like->liked == true) ? "false" : "true"  }}"></i>
-                                </span><span class="like-count mr-1">{{ $article->likesCount() }}</span> people like this
+                            @if($article->likedUser( auth()->user()->id ))
+
+                                @if(auth()->user()->id == $article->likedUser( auth()->user()->id )->user_id)
+                                    <span class="like-update align-middle mr-2" data-id="{{ $article->likedUser( auth()->user()->id )->id }}" >
+                                        <i class="mdi mdi-heart{{ (auth()->user()->id == $article->likedUser(auth()->user()->id)->user_id && $article->likedUser(auth()->user()->id)->liked == true) ? "" : "-outline" }}"
+                                            data-like="{{ (auth()->user()->id == $article->likedUser(auth()->user()->id)->user_id && $article->likedUser(auth()->user()->id)->liked == true) ? "false" : "true"  }}"></i>
+                                    </span><span class="like-count mr-1">{{ $article->likesCount() }}</span> people like this
+                                @else
+                                    <span class="like-btn align-middle mr-2" data-like="true">
+                                        <i class="mdi mdi-heart-outline"></i>
+                                    </span><span class="like-count mr-1">{{ $article->likesCount() }}</span> people like this
+                                @endif
                             @else
                                 <span class="like-btn align-middle mr-2" data-like="true">
                                     <i class="mdi mdi-heart-outline"></i>
@@ -156,14 +163,32 @@
 @section('scripts')
     <script>
         var token = "{{ csrf_token() }}";
+        var article_id = "{{ $article->id }}";
+
+        $(document).ready(function(){
+            setTimeout(
+                function(){
+                    alert('yup');
+
+                    $.ajax({
+                        type:'POST',
+                        url:'/view/article',
+                        data:{
+                            _token:token,
+                            article_id: article_id,
+                        },
+                        error:function(error){
+                            // !$this.prop("checked");
+                            console.log(error)
+                        }
+                    });
+
+                }, 10000);
+        })
 
         $('.like-btn').on('click', function(){
 
-            let article_id = "{{ $article->id }}";
             let like = $(this).data('like');
-
-            console.log(article_id)
-            console.log(like)
 
             if(like){
                 $.ajax({
@@ -177,7 +202,7 @@
                     success:function(data) {
                         $('.like-btn').html('<i class="mdi mdi-heart"></i>');
                         $('.like-btn').attr("data-like", false);
-                        $(".like-count").html(parseInt(likeCount.text()) + 1);
+                        $(".like-count").html(parseInt($(".like-count").text()) + 1);
                     },
                     error:function(error){
                         // !$this.prop("checked");
@@ -188,7 +213,6 @@
         });
 
         $('.like-update').on('click', function(){
-            let article_id = "{{ $article->id }}";
             let like = $(this).children().data('like');
             let like_id = $(this).data('id');
 

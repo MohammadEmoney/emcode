@@ -36,6 +36,11 @@ class Article extends Model
         return $this->hasMany(Like::class)->where('liked', true);
     }
 
+    public function view()
+    {
+        return $this->hasOne(ArticleView::class);
+    }
+
     public function approvedComments()
     {
         return $this->hasMany(Comment::class)->where('approved', true);
@@ -49,6 +54,17 @@ class Article extends Model
     public function likesCount()
     {
         return $this->liked()->count();
+    }
+
+    /**
+     * Get Liked User.
+     *
+     * @param int $user_id
+     * @return Like
+     */
+    public function likedUser($user_id)
+    {
+        return $this->like()->where('user_id', $user_id)->first();
     }
 
     /**

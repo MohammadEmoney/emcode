@@ -30,6 +30,7 @@ Route::namespace('Front')->group(function(){
     Route::get('contact', 'HomeController@contact')->name('contact');
     Route::post('like', 'LikeController@like');
     Route::post('like/update/{like}', 'LikeController@updateLike');
+    Route::post('view/article', 'ViewController@view');
 });
 
 Auth::routes();
