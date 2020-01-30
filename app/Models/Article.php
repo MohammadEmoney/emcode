@@ -28,11 +28,36 @@ class Article extends Model
 
     public function like()
     {
-        return $this->hasOne(Like::class);
+        return $this->hasMany(Like::class);
+    }
+
+    public function liked()
+    {
+        return $this->hasMany(Like::class)->where('liked', true);
     }
 
     public function approvedComments()
     {
         return $this->hasMany(Comment::class)->where('approved', true);
+    }
+
+    /**
+     * Get count of likes
+     *
+     * @return int
+     */
+    public function likesCount()
+    {
+        return $this->liked()->count();
+    }
+
+    /**
+     * Get a Random Liked User of article
+     *
+     * @return User
+     */
+    public function randomLikedUser()
+    {
+        return $this->like()->inRandomOrder()->first()->user;
     }
 }

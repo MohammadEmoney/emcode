@@ -35,7 +35,26 @@
                     </div>
                     <div>{!! $article->content !!}</div>
                     <div class="news_d_footer flex-column flex-sm-row">
-                        <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>Lily and 4 people like this</a>
+                        @if(Auth::check())
+                            @if(isset($article->user->like))
+                                <span class="like-update align-middle mr-2" data-id="{{ $article->user->like->id }}" >
+                                    <i class="mdi mdi-heart{{ (auth()->user()->id == $article->user->like->user_id && $article->user->like->liked == true) ? "" : "-outline" }}"
+                                        data-like="{{ (auth()->user()->id == $article->user->like->user_id && $article->user->like->liked == true) ? "false" : "true"  }}"></i>
+                                </span><span class="like-count mr-1">{{ $article->likesCount() }}</span> people like this
+                            @else
+                                <span class="like-btn align-middle mr-2" data-like="true">
+                                    <i class="mdi mdi-heart-outline"></i>
+                                </span><span class="like-count mr-1">{{ $article->likesCount() }}</span> people like this
+                            @endif
+
+                        @else
+                            <span class="login-first align-middle mr-2">
+                                <i class="mdi mdi-heart-outline"></i>
+                            </span><span class="like-count mr-1">{{ $article->likesCount() }}</span> people like this
+                        @endif
+
+
+
                         <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>{{ $article->comments()->count() }} Comments</a>
                         <div class="news_socail ml-sm-auto mt-sm-0 mt-2">
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -131,4 +150,77 @@
 </section>
 <!--================ End Blog Post Area =================-->
 
+@endsection
+
+
+@section('scripts')
+    <script>
+        var token = "{{ csrf_token() }}";
+
+        $('.like-btn').on('click', function(){
+
+            let article_id = "{{ $article->id }}";
+            let like = $(this).data('like');
+
+            console.log(article_id)
+            console.log(like)
+
+            if(like){
+                $.ajax({
+                    type:'POST',
+                    url:'/like',
+                    data:{
+                        _token:token,
+                        article_id: article_id,
+                        like: like
+                    },
+                    success:function(data) {
+                        $('.like-btn').html('<i class="mdi mdi-heart"></i>');
+                        $('.like-btn').attr("data-like", false);
+                        $(".like-count").html(parseInt(likeCount.text()) + 1);
+                    },
+                    error:function(error){
+                        // !$this.prop("checked");
+                        console.log(error)
+                    }
+                });
+            }
+        });
+
+        $('.like-update').on('click', function(){
+            let article_id = "{{ $article->id }}";
+            let like = $(this).children().data('like');
+            let like_id = $(this).data('id');
+
+            $.ajax({
+                type:'POST',
+                url:'/like/update/'+ like_id,
+                data:{
+                    _token:token,
+                    article_id: article_id,
+                    like: like
+                },
+                success:function(data) {
+                    let likeUpdate =  $('.like-update');
+                    let likeCount =  $(".like-count");
+
+                    if(data.bool == true){
+                        likeUpdate.html('<i class="mdi mdi-heart" data-like="false"></i>');
+                        likeCount.html(parseInt(likeCount.text()) + 1);
+                    }else{
+                        likeUpdate.html('<i class="mdi mdi-heart-outline" data-like="true"></i>');
+                        likeCount.html(parseInt(likeCount.text()) - 1);
+                    }
+                },
+                error:function(error){
+                    // !$this.prop("checked");
+                    console.log(error)
+                }
+            });
+        })
+
+        $('.login-first').on('click', function(){
+            alert('login First')
+        });
+    </script>
 @endsection

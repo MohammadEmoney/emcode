@@ -17,7 +17,7 @@ class CreateLikesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->bigInteger('counts')->default(0);
+            $table->boolean('liked');
             $table->foreign('article_id')->references('id')->on('articles');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
