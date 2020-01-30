@@ -24,12 +24,14 @@
           <span class="menu-title">Comments</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('users.index') }}">
-          <i class="mdi mdi-account menu-icon"></i>
-          <span class="menu-title">Users</span>
-        </a>
-    </li>
+    @if(auth()->user()->role_id == 1)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('users.index') }}">
+            <i class="mdi mdi-account menu-icon"></i>
+            <span class="menu-title">Users</span>
+            </a>
+        </li>
+    @endif
     <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#settings" aria-expanded="false" aria-controls="settings">
           <i class="mdi mdi-settings menu-icon"></i>
