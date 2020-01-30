@@ -5,6 +5,13 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
+        @if($errors->any())
+            <div class="alert alert-success">
+                <ul>
+                    <li>{{ $errors->first() }}</li>
+                </ul>
+            </div>
+        @endif
         <div class="card">
             <div class="card-body text-left ml-5">
                 <a href="{{ route('articles.create') }}" class="btn btn-primary btn-rounded btn-fw">Add + </a>
@@ -72,13 +79,13 @@
                                 </td>
                                 <td>
                                     <div class="btn-group flex-row-reverse" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-primary">
+                                        <button type="button" class="btn btn-primary" @if(!auth()->user()->can('delete', $article)) disabled @endif>
                                         <i class="mdi mdi-delete"></i>
                                         </button>
-                                        <a href="{{ route('articles.edit', $article->id) }}" type="button" class="btn btn-primary">
+                                        <a @if(auth()->user()->can('update', $article)) href="{{ route('articles.edit', $article->id) }}" @endif type="button" class="btn btn-primary">
                                         <i class="mdi mdi-pencil"></i>
                                         </a>
-                                        <a href="{{ route('articles.show', $article->id) }}" type="button" class="btn btn-primary">
+                                        <a href="{{ route('articles.show', $article->id) }}"  type="button" class="btn btn-primary">
                                         <i class="mdi mdi-eye"></i>
                                         </a>
                                     </div>

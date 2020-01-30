@@ -124,7 +124,13 @@ class CommentController extends Controller
 
     public function approve(Request $request, Comment $comment)
     {
-        $comment->update(['approved' => !$request->approve]);
+        if($request->has('checkbox')){
+            $status = ($request->checkbox == "true") ? true : false;
+            $comment->update(['approved' => $status]);
+        }else{
+            $comment->update(['approved' => !$request->approve]);
+        }
+
         return response()->json(["approve" => $comment->approved]);
     }
 }

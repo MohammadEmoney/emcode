@@ -89,3 +89,53 @@
 </div>
 
 @endsection
+
+@section('scripts')
+    <script>
+        var token = "{{ csrf_token() }}";
+
+        $('.delete').on('click', function(){
+            let $this = $(this);
+            let thisRow = $(this).parent().parent().parent()
+            let product_id = $this.data("id")
+
+            $.ajax({
+                url: "/admin/products/"+ product_id,
+                type: "POST",
+                data: {
+                    _token : token,
+                    _method: "DELETE"
+                },
+                success:function(){
+                    thisRow.fadeOut();
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            })
+        })
+
+        $('.approved').on('click', function(){
+            let $this = $(this);
+            let checkbox = $this.prop("checked")
+            let comment_id = $this.data("id")
+
+            $.ajax({
+                type:'POST',
+                url:'/admin/comment/approval/'+ comment_id,
+                data:{
+                    _token:token,
+                    checkbox: checkbox,
+                },
+                success:function(data) {
+                    !$this.prop("checked");
+                    console.log(data.approve)
+                },
+                error:function(error){
+                    // !$this.prop("checked");
+                    console.log(error)
+                }
+            });
+        })
+    </script>
+@endsection

@@ -25,4 +25,14 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function like()
+    {
+        return $this->hasOne(Like::class);
+    }
+
+    public function approvedComments()
+    {
+        return $this->hasMany(Comment::class)->where('approved', true);
+    }
 }

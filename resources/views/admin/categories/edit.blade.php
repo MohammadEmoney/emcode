@@ -8,7 +8,13 @@
       <div class="card-body">
         <h4 class="card-title">Edit {{ $category->title }}</h4>
         <p class="card-description">
-
+            @if($errors->any())
+                <div class="alert alert-success">
+                    <ul>
+                        <li>{{ $errors->first() }}</li>
+                    </ul>
+                </div>
+            @endif
         </p>
         <form class="forms-sample" method="POST" action="{{ route('categories.update', $category->id) }}" enctype="multipart/form-data">
             @csrf

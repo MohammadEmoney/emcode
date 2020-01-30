@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Like;
 use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -41,5 +42,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function like()
+    {
+        return $this->hasOne(Like::class);
     }
 }

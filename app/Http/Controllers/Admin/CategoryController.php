@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Uploads;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -101,33 +102,40 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $this->validate(request(), [
-            'title' => 'required',
-            'parent_id' => 'nullable|numeric',
-            'description' => 'nullable',
-            'image' => 'nullable|image|max:2048',
-        ]);
+        $response = Gate::inspect('update', $category);
 
-        $user = auth()->user();
+        if ($response->allowed()) {
 
-        if($request->hasFile('image')){
-            $className = Category::class;
-            $image = $this->UploadImage($request->image, $className);
+            $this->validate(request(), [
+                'title' => 'required',
+                'parent_id' => 'nullable|numeric',
+                'description' => 'nullable',
+                'image' => 'nullable|image|max:2048',
+            ]);
+
+            $user = auth()->user();
+
+            if($request->hasFile('image')){
+                $className = Category::class;
+                $image = $this->UploadImage($request->image, $className);
+            }else{
+                $image = $category->image;
+            }
+
+            $data = [
+                'title' => $request->title,
+                'user_id' => $user->id,
+                'parent_id' => $request->parent_id,
+                'description' => $request->description,
+                'image' => $image
+            ];
+
+            $category->update($data);
+
+            return redirect()->route('categories.index');
         }else{
-            $image = $category->image;
+            return redirect()->back()->withErrors(['error' => $response->message()]);
         }
-
-        $data = [
-            'title' => $request->title,
-            'user_id' => $user->id,
-            'parent_id' => $request->parent_id,
-            'description' => $request->description,
-            'image' => $image
-        ];
-
-        $category->update($data);
-
-        return redirect()->route('categories.index');
     }
 
     /**
@@ -138,13 +146,19 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if($category->image){
-            $imagePath = public_path($category->image);
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
+        $response = Gate::inspect('delete', $category);
+
+        if($response->allowed()){
+            if($category->image){
+                $imagePath = public_path($category->image);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
             }
+            $category->delete();
+            return redirect()->route('categories.index');
+        }else{
+            return redirect()->back()->withErrors(['error' => $response->message()]);
         }
-        $category->delete();
-        return redirect()->route('categories.index');
     }
 }

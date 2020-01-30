@@ -3,6 +3,13 @@
 @section('title', 'Dashboard - Edit Article')
 
 @section('content')
+    @if($errors->any())
+        <div class="alert alert-success">
+            <ul>
+                <li>{{ $errors->first() }}</li>
+            </ul>
+        </div>
+    @endif
 <div class="col-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">

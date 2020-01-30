@@ -17,7 +17,14 @@
           <div class="card-body">
             <h4 class="card-title">Categories table</h4>
             <p class="card-description">
-              All the Categories in latest added order
+                All the Categories in latest added order
+                @if($errors->any())
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{{ $errors->first() }}</li>
+                        </ul>
+                    </div>
+                @endif
             </p>
             <div class="table-responsive pt-3">
                 <table class="table table-bordered">

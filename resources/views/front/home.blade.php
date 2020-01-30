@@ -29,7 +29,7 @@
                             </ul>
                         </div>
                         <div class="details mt-20">
-                            <a href="blog-single.html">
+                            <a href="{{ route('single.article', $article->id) }}">
                             <h3>{{ $article->title }}</h3>
                             </a>
                             <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>
