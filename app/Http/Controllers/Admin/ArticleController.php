@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Article;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\Delete;
 use App\Http\Traits\Uploads;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Gate;
 
 class ArticleController extends Controller
 {
-    use Uploads;
+    use Uploads, Delete;
     /**
      * Display a listing of the resource.
      *
@@ -165,6 +166,16 @@ class ArticleController extends Controller
     {
         $response = Gate::inspect('delete', $article);
         if ($response->allowed()) {
+            $contentImages = $this->findImageOfString($article->content);
+
+            if(count($contentImages) > 0){
+                foreach($contentImages as $img){
+                    $imagePath = public_path($img);
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                }
+            }
 
             if($article->image){
                 $imagePath = public_path($article->image);

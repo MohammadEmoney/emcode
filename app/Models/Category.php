@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -10,6 +11,11 @@ class Category extends Model
     protected $fillable = [
         'title', 'image', 'description', 'parent_id', 'user_id'
     ];
+
+    public function path()
+    {
+        return url("/categories/{$this->id}-" . Str::slug($this->title));
+    }
 
     public function articles()
     {

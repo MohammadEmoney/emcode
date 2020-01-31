@@ -31,11 +31,11 @@
                                 </ul>
                             </div>
                             <div class="details mt-20">
-                                <a href="{{ route('single.article', $article->id) }}">
+                                <a href="{{ $article->path() }}">
                                 <h3>{{ $article->title }}</h3>
                                 </a>
                                 <p>{{ $article->short_description }}</p>
-                                <a class="button" href="{{ route('single.article', $article->id) }}">Read More <i class="ti-arrow-right"></i></a>
+                                <a class="button" href="{{ $article->path() }}">Read More <i class="ti-arrow-right"></i></a>
                             </div>
                             </div>
                         </div>

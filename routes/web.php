@@ -24,9 +24,9 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'admin'])->group
 
 Route::namespace('Front')->group(function(){
     Route::get('/', 'HomeController@home')->name('home');
-    Route::get('article/{article}', 'HomeController@single')->name('single.article');
+    Route::get('article/{article}-{slug}', 'HomeController@single')->name('single.article');
     Route::get('categories', 'HomeController@categories')->name('categories');
-    Route::get('categories/{category}', 'HomeController@singleCategory')->name('single.category');
+    Route::get('categories/{category}-{slug}', 'HomeController@singleCategory')->name('single.category');
     Route::get('contact', 'HomeController@contact')->name('contact');
     Route::post('like', 'LikeController@like');
     Route::post('like/update/{like}', 'LikeController@updateLike');

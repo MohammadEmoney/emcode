@@ -20,11 +20,11 @@
                                 <img class="card-img rounded-0" src="{{ $category->image }}" alt="{{ $category->title }}">
                             </div>
                             <div class="details mt-20">
-                                <a href="{{ route('single.category', $category->id) }}">
+                                <a href="{{ $category->path() }}">
                                 <h3>{{ $category->title }}</h3>
                                 </a>
                                 <p>{{ $category->description }}</p>
-                                <a class="button" href="{{ route('single.category', $category->id) }}">Read More <i class="ti-arrow-right"></i></a>
+                                <a class="button" href="{{ $category->path() }}">Read More <i class="ti-arrow-right"></i></a>
                             </div>
                             </div>
                         </div>

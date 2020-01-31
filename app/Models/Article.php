@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
@@ -10,6 +11,16 @@ class Article extends Model
     protected $fillable = [
         'title', 'short_description', 'image', 'file', 'content', 'approved', 'user_id',
     ];
+
+    public function path()
+    {
+        return url("/article/{$this->id}-" . Str::slug($this->title));
+    }
+
+    // public function getRouteKeyName()
+    // {
+    //     return 'title';
+    // }
 
     public function categories()
     {

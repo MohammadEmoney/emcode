@@ -73,4 +73,28 @@ trait Delete
         }
     	return false;
     }
+
+    /**
+     * Find Image inside the String and return array of src strings.
+     *
+     * @param string $string
+     *
+     * @return array
+     */
+    public function findImageOfString(string $string)
+    {
+        preg_match_all('/<img[^>]+>/i',$string, $result);
+
+        $img = [];
+        foreach( $result[0] as $img_tag)
+        {
+            preg_match_all('/(src)=("[^"]*")/i',$img_tag, $img[$img_tag]);
+        }
+
+        $src = [];
+        foreach($img as $img => $val){
+            $src[] = $val[2][0];
+        }
+        return $src;
+    }
 }

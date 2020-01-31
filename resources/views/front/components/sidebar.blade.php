@@ -5,7 +5,7 @@
             <ul class="cat-list mt-20">
                 @foreach($categories as $cat)
                     <li>
-                        <a href="{{ route('single.category', $cat->id) }}" class="d-flex justify-content-between">
+                        <a href="{{ $cat->path() }}" class="d-flex justify-content-between">
                             <p>{{ $cat->title }}</p>
                             <p>{{ $cat->articles->count() }}</p>
                         </a>
@@ -23,7 +23,7 @@
                             <img class="card-img rounded-0" src="{{ $article->image }}" alt="{{ $article->title }}">
                         </div>
                         <div class="details mt-20">
-                            <a href="{{ route('single.article', $article->id) }}">
+                            <a href="{{ $article->path() }}">
                                 <h6>{{ $article->title }}</h6>
                             </a> <small class="ml-2">{{ \Carbon\Carbon::parse($article->updated_at)->diffForHumans() }}</small>
                         </div>
