@@ -49,7 +49,7 @@
                         </div>
                       </div>
                     </div>
-                    <div>{!! $article->content !!}</div>
+                    <div class="article-content">{!! $article->content !!}</div>
                     <div class="news_d_footer flex-column flex-sm-row">
                         @if(Auth::check())
                             @if($article->likedUser( auth()->user()->id ))

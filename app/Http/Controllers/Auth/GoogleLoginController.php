@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
 
 class GoogleLoginController extends Controller
 {
+    protected const ROLE_SUPER_ADMIN = 1;
+    protected const ROLE_ADMIN = 2;
+    protected const ROLE_AUTHOR = 3;
+    protected const ROLE_USER = 4;
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -48,6 +53,19 @@ class GoogleLoginController extends Controller
     {
         $user = Socialite::driver('google')->user();
 
-        // $user->token;
+        $existingUser = User::where('email', $user->email)->first();
+
+        if($existingUser){
+            auth()->login($existingUser, true);
+        }else{
+            $newUser = User::create([
+                'name' => $user->getName(),
+                'email' =>  $user->getEmail(),
+                'image' => $user->getAvatar(),
+                'role_id' => self::ROLE_USER
+            ]);
+            auth()->login($newUser, true);
+        }
+        return redirect()->route('home');
     }
 }

@@ -50,8 +50,13 @@
                         @endif
                     </div>
                     <div class="mb-2">
+                        <a href="{{ route('google.login') }}" type="button" class="btn btn-block btn-google auth-form-btn">
+                            <i class="mdi mdi-google mr-2"></i>Connect using Google
+                        </a>
+                    </div>
+                    <div class="mb-2">
                         <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                        <i class="mdi mdi-facebook mr-2"></i>Connect using facebook
+                            <i class="mdi mdi-facebook mr-2"></i>Connect using facebook
                         </button>
                     </div>
                     <div class="text-center mt-4 font-weight-light">

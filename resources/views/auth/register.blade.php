@@ -65,6 +65,11 @@
                         {{ __('Register') }}
                     </button>
                 </div>
+                <div class="mt-2">
+                    <a href="{{ route('google.login') }}" type="button" class="btn btn-block btn-google auth-form-btn">
+                        <i class="mdi mdi-google mr-2"></i>Connect using Google
+                    </a>
+                </div>
                 <div class="text-center mt-4 font-weight-light">
                     Already have an account? <a href="{{ route('login') }}" class="text-primary">Login</a>
                 </div>

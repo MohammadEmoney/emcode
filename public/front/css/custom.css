@@ -9,3 +9,21 @@
 .comments-image{
     width: 100px;
 }
+
+.article-content{
+    direction: rtl !important;
+    text-align: start;
+}
+
+.code-block{
+    text-align: left;
+    direction: ltr;
+}
+
+.like-btn, .like-update, .login-first{
+    cursor: pointer;
+}
+
+.like-btn, .like-update > i {
+    color: rgb(192, 21, 21);
+}
