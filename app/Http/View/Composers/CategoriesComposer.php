@@ -36,6 +36,6 @@ class CategoriesComposer
      */
     public function compose(View $view)
     {
-        $view->with(['categories'=>  Category::take(5)->get(), 'articles' => Article::take(3)->get()]);
+        $view->with(['categories'=>  Category::with('articles')->take(5)->get(), 'articles' => Article::take(3)->get()]);
     }
 }
