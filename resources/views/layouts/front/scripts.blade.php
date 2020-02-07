@@ -1,6 +1,11 @@
-<script src="{{ asset('front/vendors/jquery/jquery-3.2.1.min.js') }}"></script>
-<script src="{{ asset('front/vendors/bootstrap/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('front/vendors/owl-carousel/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('front/js/jquery.ajaxchimp.min.js') }}"></script>
-<script src="{{ asset('front/js/mail-script.js') }}"></script>
+{{-- <script src="{{ asset('front/vendors/jquery/jquery-3.2.1.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('front/vendors/bootstrap/bootstrap.bundle.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('front/vendors/owl-carousel/owl.carousel.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('front/js/jquery.ajaxchimp.min.js') }}"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxchimp/1.3.0/jquery.ajaxchimp.min.js"></script>
+{{-- <script src="{{ asset('front/js/mail-script.js') }}"></script> --}}
 <script src="{{ asset('front/js/main.js') }}"></script>

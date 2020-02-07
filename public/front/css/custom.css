@@ -27,3 +27,45 @@
 .like-btn, .like-update > i {
     color: rgb(192, 21, 21);
 }
+
+@media (max-width: 991px)
+{
+    .header_area .navbar-auth{
+        display:block;padding:20px 0
+    }
+    .header_area .navbar-auth li{
+        float:left
+    }
+    .header_area .navbar-auth::before{
+        content:"";
+        display:block;
+        clear:both;
+        display:table
+    }
+    .header_area .navbar-auth::after{
+        content:"";
+        display:block;
+        clear:both;
+        display:table
+    }
+}
+@media (min-width: 991px)
+{
+    .header_area .navbar-auth{
+        min-width:95px;float:right
+    }
+}
+.header_area .navbar-auth li{
+    margin-right:12px
+}
+.header_area .navbar-auth li i,.header_area .navbar-auth li span{
+    font-size:13px;color:#222
+}
+.header_area .navbar-auth li:last-child{
+    margin-right:0
+}
+.header_area .navbar-auth li a:hover i,.header_area .navbar-auth li span{color:#ff9907}
+
+.header_area .navbar-auth li .nav-link{
+    border-bottom: 0 !important;
+}

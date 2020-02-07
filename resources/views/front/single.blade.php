@@ -153,9 +153,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="subject" value="{{ old('title') }}" name="title" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
-                        </div>
-                        <div class="form-group">
                             <textarea class="form-control mb-10" rows="5" name="body" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required="">{{ old('body') }}</textarea>
                         </div>
                         <button type="submit" class="button submit_btn">Post Comment</button>
@@ -203,6 +200,8 @@
         $('.like-btn').on('click', function(){
 
             let like = $(this).data('like');
+            // $('.like-btn').html('<i class="mdi mdi-heart"></i>');
+            // $(".like-count").html(parseInt($(".like-count").text()) + 1);
 
             if(like){
                 $.ajax({
@@ -229,6 +228,14 @@
         $('.like-update').on('click', function(){
             let like = $(this).children().data('like');
             let like_id = $(this).data('id');
+
+            // if(like == true){
+            //     likeUpdate.html('<i class="mdi mdi-heart" data-like="false"></i>');
+            //     likeCount.html(parseInt(likeCount.text()) + 1);
+            // }else{
+            //     likeUpdate.html('<i class="mdi mdi-heart-outline" data-like="true"></i>');
+            //     likeCount.html(parseInt(likeCount.text()) - 1);
+            // }
 
             $.ajax({
                 type:'POST',

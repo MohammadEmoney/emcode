@@ -17,11 +17,6 @@ class Article extends Model
         return url("/article/{$this->id}-" . Str::slug($this->title));
     }
 
-    // public function getRouteKeyName()
-    // {
-    //     return 'title';
-    // }
-
     public function categories()
     {
         return $this->belongsToMany(Category::class);

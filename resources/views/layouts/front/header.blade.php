@@ -37,23 +37,24 @@
                         </li> --}}
                         <li class="nav-item {{ Request::routeIs('contact') ? 'active' : '' }}"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right navbar-social">
+                    <ul class="nav navbar-nav navbar-right navbar-social mr-2">
                         <li><a href="#"><i class="ti-facebook"></i></a></li>
                         <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
                         <li><a href="https://instagram.com/coding.style.mm"><i class="ti-instagram"></i></a></li>
                         <li><a href="https://t.me/oct29_1991"><i class="mdi mdi-telegram"></i></a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right navbar-social" dir="rtl">
+                    <ul class="nav navbar-nav navbar-right navbar-auth" dir="rtl" style="width:25%">
                         @guest
-                            <li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}"><i class="ti-lock"></i></a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="pt-2">/</li>
-                                <li>
-                                    <a class="nav-link" href="{{ route('register') }}"><i class="ti-user"></i></a>
-                                </li>
-                            @endif
+                            <li class="nav-item" style="margin: 0 1em">
+                                <a class="nav-link">/</i></a>
+                                {{-- <i class="ti-Italic"></i> --}}
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}"><i class="ti-user"></i></a>
+                            </li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

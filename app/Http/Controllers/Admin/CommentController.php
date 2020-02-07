@@ -40,7 +40,6 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'title' => 'required',
             'name' => 'required',
             'body' => 'required',
             'email' => 'required|email',
@@ -51,7 +50,6 @@ class CommentController extends Controller
         $user = auth()->user();
 
         $data = [
-            'title' => $request->title,
             'body' => $request->body,
             'email' => $request->email,
             'name' => $request->name,
