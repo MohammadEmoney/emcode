@@ -31,6 +31,7 @@ Route::namespace('Front')->group(function(){
     Route::post('like', 'LikeController@like');
     Route::post('like/update/{like}', 'LikeController@updateLike');
     Route::post('view/article', 'ViewController@view');
+    Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
 });
 
 Auth::routes();

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotifyUserRegister;
+use App\Mail\UserRegister;
 use App\Notifications\NewRegisteredUser;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -78,8 +81,15 @@ class RegisterController extends Controller
         ]);
 
         $superadmins = User::where('role_id', 1)->get();
+
         foreach($superadmins as $admin){
             $admin->notify(new NewRegisteredUser($user));
+        }
+
+        $mm = User::where('email', 'memoney026@gmail.com')->first();
+        Mail::to($user)->send(new UserRegister($user));
+        if($mm){
+            Mail::to($mm)->send(new NotifyUserRegister($user));
         }
 
         return $user;

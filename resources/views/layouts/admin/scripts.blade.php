@@ -12,7 +12,8 @@
 {{-- <script src="{{ asset('admin/vendors/cropperjs/dist/cropper.esm.js') }}"></script> --}}
 {{-- <script src="{{ asset('admin/vendors/ckeditor5-build-classic/ckeditor.js') }}"></script> --}}
 <!-- ckeditor -->
-<script src="{{ asset('admin/vendors/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('admin/vendors/ckeditor-full/ckeditor.js') }}"></script>
+{{-- <script src="{{ asset('admin/vendors/ckeditor/ckeditor.js') }}"></script> --}}
 <!-- End plugin js for this page-->
 <!-- inject:js -->
 <script src="{{ asset('admin/js/off-canvas.js') }}"></script>

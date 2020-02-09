@@ -66,6 +66,7 @@
 }
 .header_area .navbar-auth li a:hover i,.header_area .navbar-auth li span{color:#ff9907}
 
-.header_area .navbar-auth li .nav-link{
+.header_area .navbar-auth li .nav-link, .header_area .navbar-auth li .nav-link i{
+    color: rgb(171, 171, 234) !important;
     border-bottom: 0 !important;
 }

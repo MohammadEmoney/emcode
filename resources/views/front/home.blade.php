@@ -19,6 +19,9 @@
         <div class="row">
             <div class="col-lg-8">
                 @foreach($articles as $article)
+                <div data-aos="fade-up"
+                    data-aos-offset="500"
+                    data-aos-duration="3000">
                     <div class="single-recent-blog-post">
                         <div class="thumb">
                             <img class="img-fluid" src="{{ $article->image }}" alt="{{ $article->title }}">
@@ -37,6 +40,7 @@
                             <a class="button" href="{{ $article->path() }}">Read More <i class="ti-arrow-right"></i></a>
                         </div>
                     </div>
+                </div>
                 @endforeach
                 <div class="row">
                     <div class="col-lg-12">
@@ -75,4 +79,10 @@
 </section>
 <!--================ End Blog Post Area =================-->
 
+@endsection
+
+@section('scripts')
+<script>
+    AOS.init();
+</script>
 @endsection

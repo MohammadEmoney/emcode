@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotifyUserRegister;
 use App\Providers\RouteServiceProvider;
 use App\Notifications\NewRegisteredUser;
+use App\Mail\UserRegister;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
 
@@ -69,7 +72,17 @@ class GoogleLoginController extends Controller
 
             $superadmins = User::where('role_id', 1)->get();
             foreach($superadmins as $admin){
-                $admin->notify(new NewRegisteredUser($user));
+                $admin->notify(new NewRegisteredUser($newUser));
+            }
+
+            // Send an Eamil to registered user.
+            Mail::to($newUser)->send(new UserRegister($newUser));
+
+            // Send an Email to me.
+            $mm = User::where('email', 'memoney026@gmail.com')->first();
+
+            if($mm){
+                Mail::to($mm)->send(new NotifyUserRegister($newUser));
             }
         }
         return redirect()->route('home');
