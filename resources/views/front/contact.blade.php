@@ -51,7 +51,7 @@
           <div class="media contact-info">
             <span class="contact-info__icon"><i class="ti-headphone"></i></span>
             <div class="media-body">
-              <h3><a href="tel:454545654">+98 935 420 9109</a></h3>
+              <h3><a href="tel:+989354209109" dir="ltr">+98 935 420 9109</a></h3>
               <p>24/7</p>
             </div>
           </div>

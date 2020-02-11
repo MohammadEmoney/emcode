@@ -34,6 +34,8 @@ Route::namespace('Front')->group(function(){
     Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
 });
 
+Route::post('comments/article', 'Admin\CommentController@store')->name('comments.article');
+
 Auth::routes();
 Route::prefix('login')->namespace('Auth')->group(function(){
     Route::get('github', 'LoginController@redirectToProvider');

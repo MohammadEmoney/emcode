@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'admin'])->except('store');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,6 +52,8 @@ class CommentController extends Controller
             'comment_id' => 'sometimes|integer'
         ]);
 
+
+
         $user = auth()->user();
 
         $data = [
@@ -58,6 +65,8 @@ class CommentController extends Controller
             'comment_id' => $request->has('comment_id') ? $request->comment_id : null
         ];
 
+
+
         $comment = Comment::create($data);
 
         $admins = User::where('role_id', 1)->orWhere('role_id', 2)->get();
@@ -65,8 +74,7 @@ class CommentController extends Controller
             $admin->notify(new NewComment($comment));
         }
 
-
-        return redirect()->back()->with('success', ['Your comment saved.']); ;
+        return redirect()->back()->with('comment-success', 'Your comment has been saved.'); ;
     }
 
     /**

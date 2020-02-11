@@ -24,18 +24,17 @@
                     data-aos-duration="3000">
                     <div class="single-recent-blog-post">
                         <div class="thumb">
-                            <img class="img-fluid" src="{{ $article->image }}" alt="{{ $article->title }}">
+                            <a href="{{ $article->path() }}"><img class="img-fluid" src="{{ $article->image }}" alt="{{ $article->title }}"></a>
                             <ul class="thumb-info">
                                 <li><a href="#"><i class="ti-user"></i>{{ $article->user->name }}</a></li>
                                 <li><a href="#"><i class="ti-notepad"></i>{{ \Carbon\Carbon::parse($article->updated_at)->diffForHumans() }}</a></li>
-                                <li><a href="#"><i class="ti-themify-favicon"></i>{{ $article->comments()->count() }} Comments</a></li>
+                                <li><a href="#"><i class="ti-themify-favicon"></i>{{ $article->approvedComments()->count() }} Comments</a></li>
                             </ul>
                         </div>
                         <div class="details mt-20">
                             <a href="{{ $article->path() }}">
-                            <h3>{{ $article->title }}</h3>
+                                <h3>{{ $article->title }}</h3>
                             </a>
-                            <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>
                             <p>{{ $article->short_description }}</p>
                             <a class="button" href="{{ $article->path() }}">Read More <i class="ti-arrow-right"></i></a>
                         </div>

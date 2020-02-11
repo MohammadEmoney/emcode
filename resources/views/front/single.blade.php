@@ -34,7 +34,7 @@
                     <div class="user_details">
                       <div class="float-left">
                         @foreach($article->categories as $cat)
-                            <a href="{{ route( 'categories.show', $cat->id ) }}">{{ $cat->title }}</a>
+                            <a href="{{ $cat->path()  }}">{{ $cat->title }}</a>
                         @endforeach
                       </div>
                       <div class="float-right mt-sm-0 mt-3">
@@ -78,7 +78,7 @@
 
 
 
-                        <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>{{ $article->comments()->count() }} Comments</a>
+                        <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>{{ $article->approvedComments()->count() }} Comments</a>
                         <div class="news_socail ml-sm-auto mt-sm-0 mt-2">
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
                             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -90,6 +90,7 @@
 
                 <div class="comments-area">
                     <h4>{{ $article->approvedComments()->count() }} Comments</h4>
+
                     @foreach($article->approvedComments as $comment)
                         <div class="comment-list">
                             <div class="single-comment justify-content-between d-flex">
@@ -99,14 +100,14 @@
                                             @if(!is_null($comment->user->image))
                                                 <img class="w-100" src="{{ $comment->user->image }}" alt="{{ $comment->user->name }}">
                                             @else
-                                                <img src="{{ asset('img/user.png') }}" alt="user-image">
+                                                <img class="w-100" src="{{ asset('img/user.png') }}" alt="user-image">
                                             @endif
                                         @else
-                                            <img src="{{ asset('img/user.png') }}" alt="user-image">
+                                            <img class="w-100" src="{{ asset('img/user.png') }}" alt="user-image">
                                         @endif
                                     </div>
                                     <div class="desc">
-                                        <h5><a href="#">{{ $comment->user->name }}</a></h5>
+                                        <h5><a href="#">{{ (is_null($comment->user) ? $comment->name : $comment->user->name) }}</a></h5>
                                         <p class="date">{{ $comment->created_at }}</p>
                                         <p class="comment">
                                             {{ $comment->body }}
@@ -140,16 +141,21 @@
                     </div> --}}
                 </div>
                 <div class="comment-form">
+                    @if (session('comment-success'))
+                        <div class="alert alert-success mt-2">
+                            {{ session('comment-success') }}
+                        </div>
+                    @endif
                     <h4>Leave a Reply</h4>
-                    <form action="{{ route('comments.store') }}" method="POST">
+                    <form action="{{ route('comments.article') }}" method="POST">
                         @csrf
                         <input type="hidden" name="article_id" value="{{ $article->id }}">
                         <div class="form-group form-inline">
                             <div class="form-group col-lg-6 col-md-6 name">
-                            <input type="text" class="form-control" id="name" value="{{ old('name') }}" name="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                            <input type="text" class="form-control" id="name" value="{{ old('name') }}" name="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'" required>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 email">
-                            <input type="email" class="form-control" id="email" value="{{ old('email') }}" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                            <input type="email" class="form-control" id="email" value="{{ old('email') }}" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" required>
                             </div>
                         </div>
                         <div class="form-group">
