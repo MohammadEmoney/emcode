@@ -14,4 +14,9 @@ class ArticleView extends Model
     {
         return $this->belongsTo(Article::class);
     }
+
+    public static function mostPopularArticles($count)
+    {
+        return self::with('article')->orderBy('count', 'DESC')->take($count)->get();
+    }
 }

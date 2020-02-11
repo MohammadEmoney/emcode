@@ -3,6 +3,7 @@
 namespace App\Http\View\Composers;
 
 use App\Models\Article;
+use App\Models\ArticleView;
 use App\Models\Category;
 use App\Repositories\UserRepository;
 use Illuminate\View\View;
@@ -36,6 +37,6 @@ class CategoriesComposer
      */
     public function compose(View $view)
     {
-        $view->with(['categories'=>  Category::with('articles')->take(5)->get(), 'articles' => Article::take(3)->get()]);
+        $view->with(['categories'=>  Category::with('articles')->take(5)->get(), 'articles' => ArticleView::mostPopularArticles(3)]);
     }
 }
