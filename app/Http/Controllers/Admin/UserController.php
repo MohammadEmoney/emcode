@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Uploads;
 use App\Models\Role;
+use App\Notifications\NewRegisteredUser;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -80,7 +81,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $unreadNotifications = Auth()->user()->unreadNotifications;
+        foreach($unreadNotifications as $notification){
+            if($notification->type == NewRegisteredUser::class && $notification->data['id'] == $user->id){
+                $notification->markAsRead();
+            }
+        }
+        return view('admin.users.show', compact('user'));
     }
 
     /**
