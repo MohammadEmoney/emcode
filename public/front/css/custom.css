@@ -28,6 +28,12 @@
     color: rgb(192, 21, 21);
 }
 
+.main_blog_details p {
+
+    font-size: 18px;
+
+}
+
 @media (max-width: 991px)
 {
     .header_area .navbar-auth{

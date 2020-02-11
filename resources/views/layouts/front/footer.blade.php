@@ -9,29 +9,26 @@
             </p>
             </div>
         </div>
-        <div class="col-lg-4  col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="single-footer-widget">
                 <h6>Newsletter</h6>
                 <p>Stay update with our latest</p>
 
-                <div class="" id="mc_embed_signup">
+                <form action="{{ route('subscribe') }}" method="post" class="form-inline">
+                    @csrf
+                    <div class="d-flex flex-row">
 
-                    <form action="{{ route('subscribe') }}" method="post" class="form-inline">
-                        @csrf
-                        <div class="d-flex flex-row">
+                        <input class="form-control" type="email" name="email" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" style="padding: 19px" required>
 
-                            <input class="form-control" type="email" name="email" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" style="padding: 19px" required>
+                        <button type="submit" class="btn btn-primary rounded-0"><i class="ti-bell"></i></button>
 
-                            <button type="submit" class="btn btn-primary rounded-0"><i class="ti-bell"></i></button>
-
+                    </div>
+                    @if (session('success'))
+                        <div class="alert alert-success mt-2" style="width: 92%">
+                            {{ session('success') }}
                         </div>
-                        @if (session('success'))
-                            <div class="alert alert-success mt-2" style="width: 92%">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                    </form>
-                </div>
+                    @endif
+                </form>
             </div>
         </div>
         <div class="col-lg-3  col-md-6 col-sm-6">
