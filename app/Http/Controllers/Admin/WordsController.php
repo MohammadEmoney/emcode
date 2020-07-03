@@ -57,7 +57,7 @@ class WordsController extends Controller
                     'offensive' => $word->meta->offensive,
                     'hwi' => json_encode($word->hwi),
                     'fl' => $word->fl,
-                    'ins' => json_encode(isset($word->ins) ? $word->ins : $word->uros),
+                    'ins' => json_encode(isset($word->ins) ? $word->ins : (isset($word->uros) ? $word->uros : null)),
                     'def' => json_encode($word->def),
                     'shortdef' => json_encode($word->shortdef),
                 ];

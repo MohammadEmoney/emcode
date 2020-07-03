@@ -34,7 +34,8 @@ Route::namespace('Front')->group(function(){
     Route::post('view/article', 'ViewController@view');
     Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
     Route::post('contact', 'HomeController@contactMessage')->name('contact.message');
-    Route::get('words/{day}', 'WordsController@index');
+    Route::get('words/{day}', 'WordsController@index')->middleware('auth');
+    Route::get('words', 'WordsController@search');
 });
 
 Route::post('comments/article', 'Admin\CommentController@store')->name('comments.article');
