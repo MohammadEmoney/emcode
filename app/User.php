@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Like;
 use App\Models\Role;
+use App\Models\Word;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function like()
     {
         return $this->hasOne(Like::class);
+    }
+
+    public function words()
+    {
+        return $this->hasMany(Word::class);
     }
 }

@@ -20,6 +20,7 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'admin'])->group
     Route::resource('comments', 'CommentController');
     Route::resource('users', 'UserController');
     Route::post('/attachImage', 'ArticleController@attachImage')->name('ckeditor.upload');
+    Route::resource('words', 'WordsController');
 });
 
 Route::namespace('Front')->group(function(){
@@ -32,6 +33,8 @@ Route::namespace('Front')->group(function(){
     Route::post('like/update/{like}', 'LikeController@updateLike');
     Route::post('view/article', 'ViewController@view');
     Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
+    Route::post('contact', 'HomeController@contactMessage')->name('contact.message');
+    Route::get('words/{day}', 'WordsController@index');
 });
 
 Route::post('comments/article', 'Admin\CommentController@store')->name('comments.article');

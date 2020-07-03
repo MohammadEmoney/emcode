@@ -64,29 +64,35 @@
           </div>
         </div>
         <div class="col-md-8 col-lg-9">
-          <form action="#/" class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-            <div class="row">
-              <div class="col-lg-5">
-                <div class="form-group">
-                  <input class="form-control" name="name" id="name" type="text" placeholder="Enter your name">
+            @if (session('success'))
+                <div class="alert alert-success mt-2" style="width: 92%">
+                    {{ session('success') }}
                 </div>
-                <div class="form-group">
-                  <input class="form-control" name="email" id="email" type="email" placeholder="Enter email address">
+            @endif
+            <form action="{{ route('contact.message') }}" class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <input class="form-control" name="name" id="name" type="text" value="{{ old('name') }}" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="email" id="email" type="email" value="{{ old('email') }}" placeholder="Enter email address">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="subject" id="subject" type="text" value="{{ old('subject') }}" placeholder="Enter Subject">
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="form-group">
+                            <textarea class="form-control different-control w-100" name="body" id="message" cols="30" rows="5" placeholder="Enter Message">{{ old('body') }}</textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <input class="form-control" name="subject" id="subject" type="text" placeholder="Enter Subject">
+                <div class="form-group text-center text-md-right mt-3">
+                    <button type="submit" class="button button--active button-contactForm">Send Message</button>
                 </div>
-              </div>
-              <div class="col-lg-7">
-                <div class="form-group">
-                    <textarea class="form-control different-control w-100" name="message" id="message" cols="30" rows="5" placeholder="Enter Message"></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="form-group text-center text-md-right mt-3">
-              <button type="submit" class="button button--active button-contactForm">Send Message</button>
-            </div>
-          </form>
+            </form>
         </div>
       </div>
     </div>

@@ -52,8 +52,6 @@ class CommentController extends Controller
             'comment_id' => 'sometimes|integer'
         ]);
 
-
-
         $user = auth()->user();
 
         $data = [
