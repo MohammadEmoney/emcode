@@ -21,6 +21,7 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'admin'])->group
     Route::resource('users', 'UserController');
     Route::post('/attachImage', 'ArticleController@attachImage')->name('ckeditor.upload');
     Route::resource('words', 'WordsController');
+    Route::resource('school', 'SchoolController');
 });
 
 Route::namespace('Front')->group(function(){
@@ -34,8 +35,15 @@ Route::namespace('Front')->group(function(){
     Route::post('view/article', 'ViewController@view');
     Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
     Route::post('contact', 'HomeController@contactMessage')->name('contact.message');
-    Route::get('words/{day}', 'WordsController@index')->middleware('auth');
-    Route::get('words', 'WordsController@search');
+    Route::get('words', 'WordsController@index')->middleware('auth');
+    Route::get('words/search', 'WordsController@searchPage');
+    Route::post('words/search', 'WordsController@search')->name('words.search');
+
+    Route::get('school', 'SchoolController@index');
+});
+
+Route::prefix('resume')->namespace('Resume')->group(function(){
+    Route::get('/', 'ResumeController@index');
 });
 
 Route::post('comments/article', 'Admin\CommentController@store')->name('comments.article');
