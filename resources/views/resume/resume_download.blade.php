@@ -1,32 +1,40 @@
-@extends('layouts.resume')
+<html lang="{{ $lan }}">
 
-@section('title'){{ $lan == 'fa' ? 'محمد ایمانی - رزومه' : 'Mohammad Imani - Resume'}}@endsection
-@section('lang'){{ $lan }}@endsection
-@section('dir'){{ $lan == 'fa' ? 'rtl' : 'ltr'}}@endsection
-@section('style')
-@if($lan == 'fa')
-<style>
-    @import url("https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css");
-    /* @import url("https://fonts.googleapis.com/css?family=Lora:400,700"); */
-    body{
-        color:#797979;
-        font-family:"Vazir","Helvetica Neue",sans-serif;
-        font-weight:400;
-        line-height:1.625
-    }
-    ul{list-style-type:none;margin:0;padding:0}
-    a:hover{text-decoration:none}
-    button{cursor:pointer}
-    button:focus{outline:0;box-shadow:none}
-    h1,h2,h3,h4,h5,h6{
-        font-family:"Vazir",serif;
-        color:#3a414e;
-        line-height:1.333;
-        direction: rtl !important;
-    }
-</style>
-@endif
-@endsection
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ $lan == 'fa' ? 'محمد ایمانی - رزومه' : 'Mohammad Imani - Resume'}}</title>
+    <meta name="description" content="php laravel developer resume - Mohammad Imani"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('cv/css/aos.css') }}" rel="stylesheet">
+    <link href="{{ asset('cv/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('cv/styles/main.css') }}" rel="stylesheet">
+    @if($lan == 'fa')
+        <style>
+            @import url("https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css");
+            /* @import url("https://fonts.googleapis.com/css?family=Lora:400,700"); */
+            body{
+                color:#797979;
+                font-family:"Vazir","Helvetica Neue",sans-serif;
+                font-weight:400;
+                line-height:1.625
+            }
+            ul{list-style-type:none;margin:0;padding:0}
+            a:hover{text-decoration:none}
+            button{cursor:pointer}
+            button:focus{outline:0;box-shadow:none}
+            h1,h2,h3,h4,h5,h6{
+                font-family:"Vazir",serif;
+                color:#3a414e;
+                line-height:1.333;
+                direction: rtl !important;
+            }
+        </style>
+    @endif
+</head>
+<body id="top" dir="{{ $lan == 'fa' ? 'rtl' : 'ltr'}}">
 
 @section('content')
 <header>
@@ -35,16 +43,6 @@
         <div class="container">
           <div class="navbar-translate"><a class="navbar-brand" href="/" rel="tooltip">Emcode</a>
             <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span></button>
-          </div>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <ul class="navbar-nav">
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="#about">@lang('resume.About')</a></li>
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="#skill">@lang('resume.Skills')</a></li>
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio">@lang('resume.Portfolio')</a></li>
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="#experience">@lang('resume.Experience')</a></li>
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact">@lang('resume.Contact')</a></li>
-              <li class="nav-item"><a class="nav-link smooth-scroll" href="{{ route('resume', ['lan' => $lan == 'fa' ? 'en' : 'fa']) }}">@lang('resume.LAN'):{{ $lan }}</a></li>
-            </ul>
           </div>
         </div>
       </nav>
@@ -60,7 +58,7 @@
                     <div class="content-center">
                         <div class="cc-profile-image"><a href="#"><img src="{{ $info->image }}" alt="Image"/></a></div>
                         <div class="h2 title">{{ $info->name }}</div>
-                        <p class="category text-white">{{ $info->title }}</p><a class="btn btn-primary smooth-scroll mr-2" href="#contact" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">@lang('resume.Hire Me')</a><a class="btn btn-primary" href="{{ route('download.resume', ['lan' => $lan]) }}" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">@lang('resume.Download CV')</a>
+                        <p class="category text-white">{{ $info->title }}</p><a class="btn btn-primary smooth-scroll mr-2" href="#contact" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">@lang('resume.Hire Me')</a><a class="btn btn-primary" href="{{ route('download.resume') }}" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">@lang('resume.Download CV')</a>
                     </div>
                     </div>
                     <div class="section">
@@ -257,74 +255,6 @@
                 @endforeach
             </div>
         </div>
-        <div class="section" id="contact" dir="ltr">
-            <div class="cc-contact-information" style="background-image: url('/cv/images/staticmap.png');">
-                <div class="container">
-                    <div class="cc-contact">
-                    <div class="row">
-                        <div class="col-md-9">
-                        <div class="card mb-0" data-aos="zoom-in">
-                            <div class="h4 text-center title">@lang('resume.Contact Me')</div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card-body">
-                                    <form action="{{ route('contact.message') }}" method="POST">
-                                        @csrf
-                                        <div class="p pb-3"><strong>@lang('resume.contact message') </strong></div>
-                                        <div class="row mb-3">
-                                        <div class="col">
-                                            <div class="input-group"><span class="input-group-addon"><i class="fa fa-user-circle"></i></span>
-                                            <input class="form-control" type="text" name="name" placeholder="Name" required="required"/>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                        <div class="col">
-                                            <div class="input-group"><span class="input-group-addon"><i class="fa fa-file-text"></i></span>
-                                            <input class="form-control" type="text" name="subject" placeholder="Subject" required="required"/>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                        <div class="col">
-                                            <div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input class="form-control" type="email" name="email" placeholder="E-mail" required="required"/>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                        <div class="col">
-                                            <div class="form-group">
-                                            <textarea class="form-control" name="body" placeholder="Your Message" required="required"></textarea>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div class="row">
-                                        <div class="col">
-                                            <button class="btn btn-primary" type="submit">@lang('resume.Send')</button>
-                                        </div>
-                                        </div>
-                                    </form>
-                                    </div>
-                                </div>
-                                <div class="col-md-6" dir="{{ $lan == 'fa' ? 'rtl' : 'ltr'}}">
-                                    <div class="card-body">
-                                    <p class="mb-0"><strong>@lang('resume.ADDRESS') </strong></p>
-                                    <p class="pb-2">{{ $info->address }}</p>
-                                    <p class="mb-0"><strong>@lang('resume.PHONE')</strong></p>
-                                    <p class="pb-2">{{ $info->phone }}</p>
-                                    <p class="mb-0"><strong>@lang('resume.EMAIL')</strong></p>
-                                    <p>{{ $info->email }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <footer class="footer">
@@ -336,4 +266,11 @@
       <p>&copy; Creative CV. All rights reserved.<br>Design - <a class="credit" href="{{ url('/') }}" target="_blank">Emcode.ir</a></p>
     </div>
 </footer>
-@endsection
+<script src="{{ asset('cv/js/core/jquery.3.2.1.min.js') }}"></script>
+<script src="{{ asset('cv/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('cv/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ asset('cv/js/now-ui-kit.js?v=1.1.0') }}"></script>
+<script src="{{ asset('cv/js/aos.js') }}"></script>
+<script src="{{ asset('cv/scripts/main.js') }}"></script>
+</body>
+</html>

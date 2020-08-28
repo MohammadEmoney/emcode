@@ -7,8 +7,8 @@
 
     <div class="container text-center">
         <h1>برنامه هفتگی کلاس اول ابتدایی</h1>
-        <h2>روزهای {{ $schedules[0]->day_type == "even" ? "زوج" : "فرد" }}</h2>
-        <div class="schedule">
+        <h2>روزهای <a href="/school?type={{ $schedules[0]->day_type == "even" ? "odd" : "even" }}">{{ $schedules[0]->day_type == "even" ? "زوج" : "فرد" }}</a></h2>
+        <div class="schedule table-responsive">
 
             <table class="table table-striped" dir="rtl">
                 <thead>
@@ -37,7 +37,7 @@
                         <td rowspan="2" class="bg-success">{{ $schedule->break }} دقیقه</td>
                         <td>{{ $schedule->class_forth }}</td>
                         <td rowspan="2" class="bg-success">{{ $schedule->break }} دقیقه</td>
-                        <td>{{ $schedule->class_fifth }}</td>
+                        <td>{{ $schedule->class_fifth ?: "غیر حضوری" }}</td>
                     </tr>
                     <tr class="table-info">
                         <td>{{ $schedule->class_first_time }}</td>

@@ -56,7 +56,7 @@
                                 <td rowspan="2" class="bg-success">{{ $schedule->break }} دقیقه</td>
                                 <td>{{ $schedule->class_forth }}</td>
                                 <td rowspan="2" class="bg-success">{{ $schedule->break }} دقیقه</td>
-                                <td>{{ $schedule->class_fifth }}</td>
+                                <td>{{ $schedule->class_fifth ?: "غیر حضوری" }}</td>
                             </tr>
                             <tr class="table-info">
                                 <td>{{ $schedule->class_first_time }}</td>

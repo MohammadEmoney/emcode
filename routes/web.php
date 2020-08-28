@@ -39,11 +39,11 @@ Route::namespace('Front')->group(function(){
     Route::get('words/search', 'WordsController@searchPage');
     Route::post('words/search', 'WordsController@search')->name('words.search');
 
-    Route::get('school', 'SchoolController@index');
-});
+    Route::get('school', 'SchoolController@index')->name('school');
 
-Route::prefix('resume')->namespace('Resume')->group(function(){
-    Route::get('/', 'ResumeController@index');
+    Route::get('resume', 'ResumeController@index')->name('resume');
+    Route::get('resume/download', 'ResumeController@downloadResume')->name('download.resume');
+    Route::get('resume-seed', 'ResumeController@seed');
 });
 
 Route::post('comments/article', 'Admin\CommentController@store')->name('comments.article');
