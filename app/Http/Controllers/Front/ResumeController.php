@@ -11,7 +11,6 @@ use App\Models\Skills;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
-use PDF;
 
 class ResumeController extends Controller
 {
@@ -40,9 +39,8 @@ class ResumeController extends Controller
         $skills = Skills::get();
         $socials = json_decode($info->socials);
         App::setLocale($lan);
-        $pdf = PDF::loadView('resume.resume_download',  compact('info', 'portfolios', 'experiences', 'skills', 'socials', 'educations', 'lan'));
-        // $pdf = PDF::loadView('resume.index',  compact('info', 'portfolios', 'experiences', 'skills', 'socials', 'educations', 'lan'));
-        return $pdf->download('resume.pdf');
+        // $pdf = PDF::loadView('resume.resume_download',  compact('info', 'portfolios', 'experiences', 'skills', 'socials', 'educations', 'lan'));
+        // return $pdf->download('resume.pdf');
     }
 
     public function seed()

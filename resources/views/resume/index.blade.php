@@ -96,7 +96,7 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-sm-4"><strong class="text-uppercase">@lang('resume.PHONE'):</strong></div>
-                            <div class="col-sm-8">{{ $info->phone }}</div>
+                            <div class="col-sm-8"><span dir="ltr">{{ $info->phone }}</span></div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-sm-4"><strong class="text-uppercase">@lang('resume.ADDRESS'):</strong></div>
@@ -312,7 +312,7 @@
                                     <p class="mb-0"><strong>@lang('resume.ADDRESS') </strong></p>
                                     <p class="pb-2">{{ $info->address }}</p>
                                     <p class="mb-0"><strong>@lang('resume.PHONE')</strong></p>
-                                    <p class="pb-2">{{ $info->phone }}</p>
+                                    <p class="pb-2"><span dir="ltr">{{ $info->phone }}</span></p>
                                     <p class="mb-0"><strong>@lang('resume.EMAIL')</strong></p>
                                     <p>{{ $info->email }}</p>
                                     </div>
