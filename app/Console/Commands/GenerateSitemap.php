@@ -38,8 +38,7 @@ class GenerateSitemap extends Command
      */
     public function handle()
     {
-        $path = public_path('/sitemap');
-        mkdir($path, 666, true);
+        $path = storage_path('sitemap');
         return SitemapGenerator::create('https://emcode.ir')->writeToFile($path);
     }
 }
