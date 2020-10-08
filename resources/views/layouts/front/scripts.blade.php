@@ -10,4 +10,5 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 {{-- <script src="{{ asset('front/js/mail-script.js') }}"></script> --}}
 {{-- <script src="{{ asset('front/vendors/aos/aos.js') }}"></script> --}}
+<script src="{{ asset('front/js/html2canvas.min.js') }}"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
