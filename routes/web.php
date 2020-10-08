@@ -27,6 +27,7 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'admin'])->group
     Route::resource('months', 'MonthController');
     Route::resource('reports', 'ReportCardController');
     Route::get('reports/{student_id}/create', 'ReportCardController@create')->name('create.report');
+    Route::post('months/setdeafult', 'MonthController@defaultMonth')->name('default.month');
 });
 
 Route::namespace('Front')->group(function(){

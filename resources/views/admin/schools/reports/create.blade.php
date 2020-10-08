@@ -34,7 +34,7 @@
                                     <label for="course_grade">ماه</label>
                                     <select class="form-control" name="month_id" id="course_grade">
                                         @foreach($months as $month)
-                                            <option value="{{ $month->id }}">{{ $month->name }}</option>
+                                            <option value="{{ $month->id }}"  {{ $month->default ? "selected" : "" }}>{{ $month->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

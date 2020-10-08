@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Month;
 use Illuminate\Http\Request;
 
 class MonthController extends Controller
@@ -14,7 +15,8 @@ class MonthController extends Controller
      */
     public function index()
     {
-        //
+        $months = Month::all();
+        return view('admin.schools.months.edit', compact('months'));
     }
 
     /**
@@ -57,7 +59,7 @@ class MonthController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -69,7 +71,8 @@ class MonthController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Month::where('id', $request->default);
+        return back()->withErrors(['با موفقیت ویرایش شد.']);
     }
 
     /**
@@ -81,5 +84,12 @@ class MonthController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function defaultMonth(Request $request)
+    {
+        Month::where('default', true)->update(['default' => false]);
+        Month::where('id', $request->default)->update(['default' => true]);
+        return back()->withErrors(['با موفقیت ویرایش شد.']);
     }
 }

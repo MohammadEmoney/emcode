@@ -5,7 +5,7 @@
 @section('content')
 
 
-    <div class="container text-center">
+    <div class="container text-center my-5">
         <h1>ارزشیابی توصیفی ماهانه کلاس اول ابتدایی</h1>
         <h2>
             <div class="row">

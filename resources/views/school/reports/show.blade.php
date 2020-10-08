@@ -5,7 +5,7 @@
 @section('content')
 
 
-    <div class="container text-center">
+    <div class="container text-center my-5">
         <h1>ارزشیابی توصیفی ماهانه <span class="text-success">{{ $report->student->name }}</span></h1>
         <h3 class="text-secondary">ماه {{ $report->month->name }}</h3>
         <div class="schedule table-responsive">

@@ -70,6 +70,12 @@
             <span class="menu-title">همه کارنامه ها</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('months.index') }}">
+            <i class="mdi mdi-file-document-box menu-icon"></i>
+            <span class="menu-title">ماه</span>
+            </a>
+        </li>
     @endif
   </ul>
 </nav>

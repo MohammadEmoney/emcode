@@ -15,6 +15,9 @@ class ReportController extends Controller
         $month = Month::where('name', $request->month)->first();
         $monthId = $month ? $month->id : 1;
         $months = Month::all();
+        $month = $months->where('name', $request->month)->first();
+        $defaultMonth = $months->where('default', true)->first();
+        $monthId  = $month ? $month->id : $defaultMonth->id;
         $reports = ReportCard::where('month_id' , $monthId)->with(['student', 'month'])->get()->sortBy(function($query){
             return $query->student->id;
          });

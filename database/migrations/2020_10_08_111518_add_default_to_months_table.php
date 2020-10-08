@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMonthsTable extends Migration
+class AddDefaultToMonthsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateMonthsTable extends Migration
      */
     public function up()
     {
-        Schema::create('months', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->boolean('default')->default(false);
-            $table->timestamps();
+        Schema::table('months', function (Blueprint $table) {
+            $table->boolean('default')->default(false)->after('name');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateMonthsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('months');
+        Schema::table('months', function (Blueprint $table) {
+            $table->dropColumn('default');
+        });
     }
 }
