@@ -14,16 +14,26 @@
         @endif
         <div class="card">
             <div class="card-body text-left ml-5">
-                <a href="{{ route('students.create') }}" class="btn btn-primary btn-rounded btn-fw">Add + </a>
+                <a href="{{ route('students.index') }}" class="btn btn-primary btn-rounded btn-fw">Add + </a>
             </div>
-            <select name="" id=""></select>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <select class="form-control border-info" name="month" id="month">
+                            @foreach($months as $month)
+                                <option value="{{ $month->name }}" {{ $month->id == $monthId ? "selected" : "" }}>{{ $month->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">school table</h4>
+            <h4 class="card-title">کارنامه های ماه {{ $month->name }}</h4>
             <p class="card-description">
               All the school in latest added order
             </p>
@@ -76,4 +86,13 @@
     </div>
 </div>
 
+@endsection
+@section('scripts')
+    <script>
+        var route = "{{ url('/admin/reports') }}"
+        $('#month').change(function() {
+            window.location =  route + "?month=" + $(this).val();
+            console.log(route + "?month=" + $(this).val());
+        });
+    </script>
 @endsection

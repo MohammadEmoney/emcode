@@ -21,11 +21,17 @@ class ReportCardController extends Controller
      */
     public function index(Request $request)
     {
-        $request->validate(['month' => 'sometimes|exists:months,id']);
-        $month = $request->month ?: 1;
+        $request->validate(['month' => 'sometimes|string|exists:months,name']);
+        $month = Month::where('name', $request->month)->first();
+        $monthId = $month ? $month->id : 1;
         $months = Month::all();
-        $reports = ReportCard::where('month_id' , $month)->with(['student', 'month'])->get();
-        return view('admin.schools.reports.index', compact('reports', 'months'));
+        $month = $months->where('name', $request->month)->first();
+        $defaultMonth = $months->where('default', true)->first();
+        $monthId  = $month ? $month->id : $defaultMonth->id;
+        $reports = ReportCard::where('month_id' , $monthId)->with(['student', 'month'])->get()->sortBy(function($query){
+            return $query->student->id;
+         });
+        return view('admin.schools.reports.index', compact('reports', 'months', 'monthId'));
     }
 
     /**
@@ -117,8 +123,9 @@ class ReportCardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ReportCard $report)
     {
-        //
+        $report->delete();
+        return redirect()->route('reports.index')->withErrors(['با موفقیت حذف شد']);
     }
 }
