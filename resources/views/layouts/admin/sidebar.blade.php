@@ -36,6 +36,18 @@
           <span class="menu-title">School</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('students.index') }}">
+          <i class="mdi mdi-file-document-box menu-icon"></i>
+          <span class="menu-title">دانش آموزان</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('reports.index') }}">
+          <i class="mdi mdi-file-document-box menu-icon"></i>
+          <span class="menu-title">همه کارنامه ها</span>
+        </a>
+    </li>
     @if(auth()->user()->role_id == 1)
         <li class="nav-item">
             <a class="nav-link" href="{{ route('users.index') }}">

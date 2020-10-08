@@ -41,6 +41,7 @@
                 <li><a href="{{ route('contact') }}">Contact</a></li>
                 <li><a href="{{ route('school') }}">school</a></li>
                 <li><a href="{{ route('resume') }}">resume</a></li>
+                <li><a href="{{ route('school.report') }}">report</a></li>
                 {{-- @foreach($instagram as $insta)
                     <li><a href="{{ $insta->link }}"><img src="{{ $insta->images->thumbnail->url }}" alt="instagram"></a></li>
                 @endforeach --}}

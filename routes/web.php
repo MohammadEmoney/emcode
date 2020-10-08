@@ -22,6 +22,11 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'admin'])->group
     Route::post('/attachImage', 'ArticleController@attachImage')->name('ckeditor.upload');
     Route::resource('words', 'WordsController');
     Route::resource('school', 'SchoolController');
+    Route::resource('students', 'StudentController');
+    Route::resource('courses', 'CourseController');
+    Route::resource('months', 'MonthController');
+    Route::resource('reports', 'ReportCardController');
+    Route::get('reports/{student_id}/create', 'ReportCardController@create')->name('create.report');
 });
 
 Route::namespace('Front')->group(function(){
@@ -40,6 +45,8 @@ Route::namespace('Front')->group(function(){
     Route::post('words/search', 'WordsController@search')->name('words.search');
 
     Route::get('school', 'SchoolController@index')->name('school');
+    Route::get('school/report', 'ReportController@index')->name('school.report');
+    Route::get('school/report/{report}', 'ReportController@report')->name('student.report');
 
     Route::get('resume', 'ResumeController@index')->name('resume');
     Route::get('resume/download', 'ResumeController@downloadResume')->name('download.resume');
