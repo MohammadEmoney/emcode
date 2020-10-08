@@ -14,7 +14,7 @@
         @endif
         <div class="card">
             <div class="card-body text-left ml-5">
-                <a href="{{ route('create.report', ['student_id' => $student->id]) }}" class="btn btn-primary btn-rounded btn-fw">Add Report + </a>
+                <a href="{{ route('create.report', ['student_id' => $student->id]) }}" class="btn btn-primary btn-rounded btn-fw">افزودن کارنامه</a>
             </div>
         </div>
     </div>
@@ -22,9 +22,9 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">school table</h4>
+            <h2 class="card-title">{{ $student->name }}</h2>
             <p class="card-description">
-              All the school in latest added order
+
             </p>
             <div class="table-responsive pt-3">
                 <div class="schedule">
@@ -77,6 +77,21 @@
                     </table>
                 </div>
             </div>
+          </div>
+          <div class="card">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col">
+                            @if($student->next())
+                                <a href="{{ route('students.show', $student->next()->id) }}" class="btn btn-primary"><span dir="ltr">{{ $student->next()->name }} &#187;</span></a>
+                            @endif
+                            @if($student->previous())
+                                <a href="{{ route('students.show', $student->previous()->id) }}" class="btn btn-secondary"><span dir="ltr">&#171; {{ $student->previous()->name }}</span></a>
+                            @endif
+                      </div>
+                  </div>
+
+              </div>
           </div>
         </div>
     </div>

@@ -50,7 +50,9 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         $reports = ReportCard::where('student_id', $student->id)->get();
-        return view('admin.schools.students.show', compact('student', 'reports'));
+        $next = Student::where('id', '>', $student->id)->first();
+        $previous = Student::where('id', '<', $student->id)->first();
+        return view('admin.schools.students.show', compact('student', 'reports', 'next', 'previous'));
     }
 
     /**

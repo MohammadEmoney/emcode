@@ -39,7 +39,7 @@
                                 <td>{{ $report->student->id }}</td>
                                 <td>{{ $report->student->first_name }}</td>
                                 <td>{{ $report->student->last_name }}</td>
-                                <td><a href="{{ route('student.report', $report->id) }}">Report</a></td>
+                                <td><a href="{{ route('student.report', $report->id) }}">مشاهده</a></td>
                             </tr>
                         @endforeach
                     @else
